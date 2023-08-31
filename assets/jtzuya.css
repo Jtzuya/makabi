@@ -568,12 +568,23 @@ video {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.bg-transparent {
-  background-color: transparent;
-}
 .bg-latte {
   --tw-bg-opacity: 1;
   background-color: rgb(235 232 227 / var(--tw-bg-opacity));
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.font-neue {
+  font-family: PP Neue Montreal;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .uppercase {
   text-transform: uppercase;
@@ -599,6 +610,25 @@ video {
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
+@font-face {
+  font-family: "canela";
+  font-style: italic;
+  src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/canela-light-italic.woff2?v=1693500533") format("woff2");
+}
+@font-face {
+  font-family: "canela";
+  src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/canela-light.woff2?v=1693500534") format("woff2");
+}
+@font-face {
+  font-family: "neue";
+  font-weight: 500;
+  src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/neue-medium.woff2?v=1693500638") format("woff2");
+}
+@font-face {
+  font-family: "neue";
+  font-weight: 400;
+  src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/neue-book.woff2?v=1693500632") format("woff2");
+}
 @media (min-width: 768px) {
 
   .md\:relative {
@@ -620,10 +650,22 @@ video {
   .md\:bg-inherit {
     background-color: inherit;
   }
+
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
 }
 @media (min-width: 1024px) {
 
   .lg\:w-58 {
     width: 235.67px;
+  }
+}
+@media (min-width: 1280px) {
+
+  .xl\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }

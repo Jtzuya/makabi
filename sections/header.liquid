@@ -144,7 +144,8 @@
 -%}
 <header class="absolute w-full bg-transparent">
   <div x-data="{'showMobileMenu': false}">
-    <button @click="showMobileMenu = showMobileMenu === false ? true : false">Button</button>
+    <button @click="showMobileMenu = showMobileMenu != true ? true : false;" 
+      class="text-base md:text-lg xl:text-xl font-neue">Menu</button>
     {%- render 'header-mega-menu' %}
   </div>
 

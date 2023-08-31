@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'canela';
+    font-style: italic;
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/canela-light-italic.woff2?v=1693500533") format("woff2");
+}
+
+@font-face {
+    font-family: 'canela';
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/canela-light.woff2?v=1693500534") format("woff2");
+}
+
+@font-face {
+    font-family: 'neue';
+    font-weight: 500;
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/neue-medium.woff2?v=1693500638") format("woff2");
+}
+
+@font-face {
+    font-family: 'neue';
+    font-weight: 400;
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/neue-book.woff2?v=1693500632") format("woff2");
+}

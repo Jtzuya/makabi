@@ -19,6 +19,10 @@ module.exports = {
       },
       colors: {
         'latte': '#EBE8E3'
+      },
+      fontFamily: {
+        'neue': 'PP Neue Montreal',
+        'canela': 'Canela Trial'
       }
     },
   },
