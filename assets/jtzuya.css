@@ -670,6 +670,10 @@ video {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
 .bg-latte {
   --tw-bg-opacity: 1;
   background-color: rgb(235 232 227 / var(--tw-bg-opacity));
@@ -794,6 +798,14 @@ video {
   }
 }
 @media (min-width: 1280px) {
+
+  .xl\:border-\[1px\] {
+    border-width: 1px;
+  }
+
+  .xl\:border-b-\[1px\] {
+    border-bottom-width: 1px;
+  }
 
   .xl\:text-xl {
     font-size: 1.25rem;

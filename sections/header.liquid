@@ -126,7 +126,7 @@
     assign localization_forms = true
   endif
 -%}
-<header class="fixed inset-0 grid grid-cols-4 place-items-center z-20 w-full h-[60px] px-4 md:h-[58px] xl:h[69px] bg-transparent">
+<header class="fixed inset-0 grid grid-cols-4 place-items-center z-20 w-full h-[60px] px-4 md:h-[58px] xl:h[69px] xl:border-b-[1px] border-white bg-transparent">
   <div x-data="{'showMobileMenu': false}" class="w-full flex justify-start items-center">
     <button 
       @click="showMobileMenu = showMobileMenu != true ? true : false;"
