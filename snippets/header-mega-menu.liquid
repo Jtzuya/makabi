@@ -5,8 +5,44 @@
     {% render 'header-mega-menu' %}
 {% endcomment %}
 
-<nav class="fixed w-full h-screen bg-latte md:relative md:h-auto md:bg-inherit" x-show="showMobileMenu">
-    <ul class="md:hidden" role="list">
+<nav class="fixed inset-0 z-50 translate-x-full first-letter:w-full h-screen bg-latte md:relative md:h-auto md:bg-inherit transition-all" 
+    :class="showMobileMenu == true ? 'translate-x-0' : '-translate-x-full'"
+    x-cloak
+>
+    <ul class="px-4 md:hidden" role="list">
+        <div class="relative grid place-items-center justify-center mb-[72px] h-[60px]">
+            <button 
+            @click="showMobileMenu = showMobileMenu != true ? true : false; console.log(showMobileMenu)"
+            class="absolute z-10 w-6 h-6 grid place-items-center left-0 top-1/2 -translate-y-1/2 text-base md:text-lg xl:text-xl font-canela text-dark-txt">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>          
+            </button>
+
+            <a href="{{ routes.root_url }}" class="col-span-2">
+                {%- if settings.logo != blank -%}
+                    <div class="relative grid place-items-center">
+                        {% assign logo = settings.logo_dark %}
+                
+                        {%- assign logo_alt = logo | default: shop.name | escape -%}
+                        {%- assign logo_height = settings.logo_width | divided_by: logo.aspect_ratio -%}
+                        {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+                        {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+                        {{ logo | image_url: width: 600 | image_tag:
+                            class: 'header__heading-logo motion-reduce w-34 md:w-38 lg:w-58',
+                            widths: widths,
+                            height: logo_height,
+                            width: settings.logo_width,
+                            alt: logo_alt,
+                            sizes: sizes,
+                            preload: true
+                        }}
+                    </div>
+                {%- else -%}
+                    <span class="h2">{{ shop.name }}</span>
+                {%- endif -%}
+            </a>
+        </div>
         {%- for link in section.settings.menu.links -%}
             <li>
             {%- if link.links != blank -%}
@@ -14,7 +50,7 @@
                     <a
                         id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
                         href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                        class="text-[46px] font-neue"
                         {% if childlink.current %}
                             aria-current="page"
                         {% endif %}
@@ -25,7 +61,7 @@
                                 <a
                                 id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                 href="{{ grandchildlink.url }}"
-                                class=""
+                                class="text-[46px] font-canela"
                                     {% if grandchildlink.current %}
                                         aria-current="page"
                                     {% endif %}
@@ -38,14 +74,14 @@
                 <a
                     id="HeaderMenu-{{ link.handle }}"
                     href="{{ link.url }}"
-                    class="header__menu-item list-menu__item link link--text focus-inset"
+                    class="text-[46px] font-neue"
                     {% if link.current %}
                     aria-current="page"
                     {% endif %}
                 >
                     <span
                     {%- if link.current %}
-                        class="header__active-menu-item"
+                        class=""
                     {% endif %}
                     >{{- link.title | escape -}}</span>
                 </a>

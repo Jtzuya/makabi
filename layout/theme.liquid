@@ -144,9 +144,6 @@
         ;
         --font-heading-weight: {{ settings.type_header_font.weight }}
         ;
-
-        --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }}
-        ;
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }}
         ;
 
@@ -382,7 +379,6 @@
 
       html {
         box-sizing: border-box;
-        font-size: calc(var(--font-body-scale) * 62.5%);
         height: 100%;
       }
 
@@ -392,18 +388,11 @@
         grid-template-columns: 100%;
         min-height: 100%;
         margin: 0;
-        font-size: 1.5rem;
         letter-spacing: 0.06rem;
-        line-height: calc(1 + 0.8 / var(--font-body-scale));
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
-      }
-
-      @media screen and (min-width: 750px) {
-        body {
-          font-size: 1.6rem;
-        }
+        position: relative;
       }
     {% endstyle %}
 
@@ -448,8 +437,8 @@
     </script>
   </head>
 
-  <body class="relative gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+  <body x-data='body' class="relative gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+    <a class="skip-to-content-link button sr-only" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
 

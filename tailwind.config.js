@@ -17,12 +17,16 @@ module.exports = {
         '38': '155px',
         '58': '235.67px',
       },
+      height: {
+        '15': '60px'
+      },
       colors: {
-        'latte': '#EBE8E3'
+        'latte': '#EBE8E3',
+        'dark-txt': '#161010'
       },
       fontFamily: {
-        'neue': 'PP Neue Montreal',
-        'canela': 'Canela Trial'
+        'neue': 'neue',
+        'canela': 'canela'
       }
     },
   },
