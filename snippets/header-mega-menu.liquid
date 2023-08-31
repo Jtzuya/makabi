@@ -1,11 +1,59 @@
 {% comment %}
-  Renders a megamenu for the header.
+    Renders a megamenu for the header.
 
-  Usage:
-  {% render 'header-mega-menu' %}
+    Usage:
+    {% render 'header-mega-menu' %}
 {% endcomment %}
 
-<nav class="header__inline-menu">
+<nav class="fixed w-full h-screen bg-latte md:relative md:h-auto md:bg-inherit">
+    <ul class="md:hidden" role="list">
+        {%- for link in section.settings.menu.links -%}
+            <li>
+            {%- if link.links != blank -%}
+                {%- for childlink in link.links -%}
+                    <a
+                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                        href="{{ childlink.url }}"
+                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                        {% if childlink.current %}
+                            aria-current="page"
+                        {% endif %}
+                    >{{ childlink.title | escape }}</a>
+
+                        {%- if childlink.links != blank -%}
+                            {%- for grandchildlink in childlink.links -%}
+                                <a
+                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                href="{{ grandchildlink.url }}"
+                                class=""
+                                    {% if grandchildlink.current %}
+                                        aria-current="page"
+                                    {% endif %}
+                                >{{ grandchildlink.title | escape }}</a>
+                            {%- endfor -%}
+                        {%- endif -%}
+                {%- endfor -%}
+
+            {%- else -%}
+                <a
+                    id="HeaderMenu-{{ link.handle }}"
+                    href="{{ link.url }}"
+                    class="header__menu-item list-menu__item link link--text focus-inset"
+                    {% if link.current %}
+                    aria-current="page"
+                    {% endif %}
+                >
+                    <span
+                    {%- if link.current %}
+                        class="header__active-menu-item"
+                    {% endif %}
+                    >{{- link.title | escape -}}</span>
+                </a>
+            {%- endif -%}
+        </li>
+    {%- endfor -%}
+  </ul>
+  {% comment %} 
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
       <li>
@@ -91,4 +139,5 @@
       </li>
     {%- endfor -%}
   </ul>
+  {% endcomment %}
 </nav>

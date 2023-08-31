@@ -11,7 +11,16 @@ module.exports = {
     './template/customers/*.json',
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        '34': '138px',
+        '38': '155px',
+        '58': '235.67px',
+      },
+      colors: {
+        'latte': '#EBE8E3'
+      }
+    },
   },
   plugins: [],
 }
