@@ -5,7 +5,7 @@
     {% render 'header-mega-menu' %}
 {% endcomment %}
 
-<nav class="fixed w-full h-screen bg-latte md:relative md:h-auto md:bg-inherit">
+<nav class="fixed w-full h-screen bg-latte md:relative md:h-auto md:bg-inherit" x-show="showMobileMenu">
     <ul class="md:hidden" role="list">
         {%- for link in section.settings.menu.links -%}
             <li>
