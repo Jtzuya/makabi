@@ -16,6 +16,11 @@
         "label": "t:settings_schema.logo.settings.logo_image.label"
       },
       {
+        "type": "url",
+        "id": "logo_url",
+        "label": "logo as URL"
+      },
+      {
         "type": "range",
         "id": "logo_width",
         "min": 50,
