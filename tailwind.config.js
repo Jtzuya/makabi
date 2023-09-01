@@ -22,7 +22,8 @@ module.exports = {
       },
       colors: {
         'latte': '#EBE8E3',
-        'dark-txt': '#161010'
+        'dark-txt': '#161010',
+        'header-dark-txt': '#161010'
       },
       fontFamily: {
         'neue': 'neue',
