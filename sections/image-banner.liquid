@@ -35,7 +35,7 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .banner--{{ section.id }} {
       background: url({{ section.settings.image | image_url: width: '1600' | prepend: 'https:' }});
       background-attachment: fixed;
@@ -66,6 +66,11 @@
   {% endfor %} 
 </div>
 
+<div class="pt-20 pb-16 px-4 md:px-8 md:pt-24 lg:px-10 lg:pb-[293px] lg:mb-[137px] lg:pt-[117px] relative">
+  <h3 class="relative z-[2] lg:max-w-[1030px] font-canela !font-light text-[40px] text-dark-txt leading-[110%] md:text-[56px] lg:text-[80px] lg:font-neue">Journey with us as we explore worlds near and far to bring you <span class="lg:font-canela lg:font-normal lg:italic">the uncommon</span></h3>
+  <img class="absolute top-0 right-10 hidden lg:!block" src="{{ section.settings.image_3 | image_url: width: '608' | prepend: 'https:'  }}" alt="{{ section.settings.image_3.alt }}">
+</div>
+
 {% schema %}
 {
   "name": "t:sections.image-banner.name",
@@ -84,6 +89,11 @@
       "type": "image_picker",
       "id": "image_2",
       "label": "image (mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "image 3"
     },
     {
       "type": "range",
