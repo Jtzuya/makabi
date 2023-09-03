@@ -28,6 +28,11 @@ module.exports = {
       fontFamily: {
         'neue': 'neue',
         'canela': 'canela'
+      },
+      fontSize: {
+        '5xl': '46px',
+        '6xl': '96px',
+        '7xl': '140px'
       }
     },
   },

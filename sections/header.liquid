@@ -128,10 +128,9 @@
 -%}
 <div x-data="{'atTop': false}">
   <header 
-    class="fixed inset-0 grid grid-cols-4 place-items-center z-20 w-full h-[60px] px-4 md:px-8 xl:px-10 md:h-[58px] xl:h[69px] xl:border-b-[1px] border-white bg-transparent"
+    class="transition-all fixed inset-0 grid grid-cols-4 place-items-center z-20 w-full h-[60px] px-4 md:px-8 xl:px-10 md:h-[58px] xl:h[69px] xl:border-b-[1px] border-white bg-transparent"
     :class="{'bg-transparent': !atTop, 'bg-latte border-latte': atTop}"
-    x-cloak
-    @scroll.window="atTop = (window.pageYOffset < 50) ? false : true"
+    @scroll.window="atTop = (window.pageYOffset < 90) ? false : true"
   >
     <div x-data="{'showMobileMenu': false}" class="w-full flex justify-start items-center gap-x-8">
       <a href="{{ section.settings.menu.links[2].url }}" 

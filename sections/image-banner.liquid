@@ -1,165 +1,69 @@
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
-
-{%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
-  {%- style -%}
-    @media screen and (max-width: 749px) {
-      #Banner-{{ section.id }}::before,
-      #Banner-{{ section.id }} .banner__media::before,
-      #Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
-      }
-    }
-
-    @media screen and (min-width: 750px) {
-      #Banner-{{ section.id }}::before,
-      #Banner-{{ section.id }} .banner__media::before {
-        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
-      }
-    }
-  {%- endstyle -%}
-{%- endif -%}
+{%- liquid
+  assign image_2 = section.settings.image_2 | image_url: width: 'master' | prepend: 'https:'
+  assign image = section.settings.image | image_url: width: 'master' | prepend: 'https:'
+-%}
 
 {%- style -%}
-  #Banner-{{ section.id }}::after {
-    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  .banner--{{ section.id }} {
+    width: 100%;
+    height: 100vh;
+    background: url({{ section.settings.image_2 | image_url: width: '768' | prepend: 'https:' }});
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .banner--{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(0 0 0 / 35%);
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .banner--{{ section.id }} {
+      background: url({{ section.settings.image | image_url: width: '1024' | prepend: 'https:' }});
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .banner--{{ section.id }} {
+      background: url({{ section.settings.image | image_url: width: '1600' | prepend: 'https:' }});
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 {%- endstyle -%}
 
-{%- liquid
-  assign full_width = '100vw'
-  assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
-
-  if section.settings.image_behavior == 'ambient'
-    assign half_width = '60vw'
-    assign full_width = '120vw'
-    assign stacked_sizes = '(min-width: 750px) 60vw, 120vw'
-    assign widths = '450, 660, 900, 1320, 1800, 2136, 2400, 3600, 7680'
-  elsif section.settings.image_behavior == 'fixed' or section.settings.image_behavior == 'zoom-in'
-    assign half_width = '100vw'
-    assign stacked_sizes = '100vw'
-  else
-    assign half_width = '50vw'
-    assign stacked_sizes = '(min-width: 750px) 50vw, 100vw'
-  endif
--%}
-
-<div
-  id="Banner-{{ section.id }}"
-  class="banner banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.image_height == 'adapt' and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
->
-  {%- if section.settings.image != blank -%}
-    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {%- liquid
-        assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
-        if section.settings.image_2 != blank
-          assign image_class = 'banner__media-image-half'
-        endif
-        if section.settings.image_2 != blank and section.settings.stack_images_on_mobile
-          assign sizes = stacked_sizes
-        elsif section.settings.image_2 != blank
-          assign sizes = half_width
-        else
-          assign sizes = full_width
-        endif
-      -%}
-      {{
-        section.settings.image
-        | image_url: width: 3840
-        | image_tag:
-          loading: 'lazy',
-          width: section.settings.image.width,
-          height: image_height,
-          class: image_class,
-          sizes: sizes,
-          widths: widths
-      }}
-    </div>
-  {%- elsif section.settings.image_2 == blank -%}
-    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
-  {%- endif -%}
-  {%- if section.settings.image_2 != blank -%}
-    <div class="banner__media media{% if section.settings.image != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {%- liquid
-        assign image_height_2 = section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio
-        if section.settings.image != blank
-          assign image_class_2 = 'banner__media-image-half'
-        endif
-        if section.settings.image != blank and section.settings.stack_images_on_mobile
-          assign sizes = stacked_sizes
-        elsif section.settings.image_2 != blank
-          assign sizes = half_width
-        else
-          assign sizes = full_width
-        endif
-      -%}
-      {{
-        section.settings.image_2
-        | image_url: width: 3840
-        | image_tag:
-          loading: 'lazy',
-          width: section.settings.image_2.width,
-          height: image_height_2,
-          class: image_class_2,
-          sizes: sizes,
-          widths: widths
-      }}
-    </div>
-  {%- endif -%}
-  <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'heading' -%}
-            <h2
-              class="banner__heading inline-richtext {{ block.settings.heading_size }}"
-              {{ block.shopify_attributes }}
-            >
-              {{ block.settings.heading }}
-            </h2>
-          {%- when 'text' -%}
-            <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-              <p>{{ block.settings.text }}</p>
-            </div>
-          {%- when 'buttons' -%}
-            <div
-              class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}"
-              {{ block.shopify_attributes }}
-            >
-              {%- if block.settings.button_label_1 != blank -%}
-                <a
-                  {% if block.settings.button_link_1 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_1 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_1 | escape -}}
-                </a>
-              {%- endif -%}
-              {%- if block.settings.button_label_2 != blank -%}
-                <a
-                  {% if block.settings.button_link_2 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_2 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_2 | escape -}}
-                </a>
-              {%- endif -%}
-            </div>
-        {%- endcase -%}
-      {%- endfor -%}
-    </div>
-  </div>
+<div class="relative w-full h-[812px] md:h-[1024px] lg:h-[110px] banner--{{ section.id }}">
+  <h1 class="relative z-[2] text-white pt-[132px] px-[14.5px] md:pt-[154px] md:px-7 lg:pt-[150px] text-5xl md:text-6xl lg:text-7xl text-center uppercase font-canela font-light tracking-normal scroll-trigger animate--slide-in" 
+    data-cascade style="--animation-order: 0;">Escape<br> the ordinary!</h1>
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'buttons' %}
+      <a href="{{ block.settings.button_link_1 }}" class="relative z-[2] scroll-trigger animate--slide-in" data-cascade style="--animation-order: 0;"> 
+        <span class="w-max flex items-center gap-x-2.5 border border-white rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-4">
+          <span class="font-light font-neue text-xl text-white">{{ block.settings.button_label_1 }}</span>
+          <span class="min-w-9 w-9 h-9 rounded-full bg-white grid place-items-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7026 10.4058C17.7969 11.2716 19.0547 11.8967 19.9997 11.8948L19.9998 11.9239L19.9997 11.953L20 11.953L19.9992 12.3601L20 12.7674V12.7965V12.8256C19.055 12.8236 17.7969 13.4488 16.7026 14.3147C16.1662 14.7391 15.692 15.2032 15.3388 15.6403C14.9762 16.0891 14.7758 16.4669 14.7259 16.7204L13.8697 16.5519C13.9612 16.0873 14.27 15.5747 14.6601 15.0919C15.0596 14.5974 15.5818 14.0887 16.1611 13.6303C16.5415 13.3294 16.9572 13.0418 17.3888 12.7924L4 12.7674L4.00137 11.8948L17.3746 11.9198C16.9481 11.6723 16.5373 11.3878 16.1611 11.0901C15.5818 10.6318 15.0596 10.1231 14.6601 9.62855C14.27 9.14572 13.9612 8.63312 13.8697 8.16855L14.7259 8C14.7758 8.25348 14.9762 8.63132 15.3388 9.08012C15.692 9.51724 16.1662 9.98135 16.7026 10.4058Z" fill="#161010"/>
+            </svg>      
+          </span>
+        </span>
+      </a>
+    {% endcase %}
+  {% endfor %} 
 </div>
 
 {% schema %}
@@ -186,7 +90,7 @@
       "id": "image_overlay_opacity",
       "min": 0,
       "max": 100,
-      "step": 10,
+      "step": 5,
       "unit": "%",
       "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
       "default": 0
