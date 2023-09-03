@@ -4,6 +4,30 @@
 -%}
 
 {%- style -%}
+  .btn:hover .btn-effect::before {
+    top: 50%;
+    left: 50%;
+    scale: 1;
+  }
+
+  .btn:hover .btn-text { color: #161010; }
+  .btn-text { transition: color 0.15s ease; transition-delay: .2s; }
+
+  .btn-effect::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    background-color: rgb(255 255 255 / 100%);
+    border-radius: 30px;
+    scale: 0;
+    z-index: -1;
+    transition: all 0.2s ease;
+  }
+
   .banner--{{ section.id }} {
     width: 100%;
     height: 100vh;
@@ -52,23 +76,25 @@
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'buttons' %}
-      <a href="{{ block.settings.button_link_1 }}" class="relative z-[2] scroll-trigger animate--slide-in" data-cascade style="--animation-order: 0;"> 
-        <span class="w-max flex items-center gap-x-2.5 border border-white rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-4">
-          <span class="font-light font-neue text-xl text-white">{{ block.settings.button_label_1 }}</span>
-          <span class="min-w-9 w-9 h-9 rounded-full bg-white grid place-items-center">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7026 10.4058C17.7969 11.2716 19.0547 11.8967 19.9997 11.8948L19.9998 11.9239L19.9997 11.953L20 11.953L19.9992 12.3601L20 12.7674V12.7965V12.8256C19.055 12.8236 17.7969 13.4488 16.7026 14.3147C16.1662 14.7391 15.692 15.2032 15.3388 15.6403C14.9762 16.0891 14.7758 16.4669 14.7259 16.7204L13.8697 16.5519C13.9612 16.0873 14.27 15.5747 14.6601 15.0919C15.0596 14.5974 15.5818 14.0887 16.1611 13.6303C16.5415 13.3294 16.9572 13.0418 17.3888 12.7924L4 12.7674L4.00137 11.8948L17.3746 11.9198C16.9481 11.6723 16.5373 11.3878 16.1611 11.0901C15.5818 10.6318 15.0596 10.1231 14.6601 9.62855C14.27 9.14572 13.9612 8.63312 13.8697 8.16855L14.7259 8C14.7758 8.25348 14.9762 8.63132 15.3388 9.08012C15.692 9.51724 16.1662 9.98135 16.7026 10.4058Z" fill="#161010"/>
-            </svg>      
-          </span>
-        </span>
-      </a>
+        <div class="flex items-center justify-center">
+          <a href="{{ block.settings.button_link_1 }}" class="btn relative z-[2] scroll-trigger {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade> 
+            <span x-cloak class="btn-effect relative oveflow-hidden w-max flex items-center gap-x-2.5 border border-white rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-4">
+              <span class="btn-text font-light font-neue text-xl text-white">{{ block.settings.button_label_1 }}</span>
+              <span class="min-w-9 w-9 h-9 rounded-full bg-white grid place-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7026 10.4058C17.7969 11.2716 19.0547 11.8967 19.9997 11.8948L19.9998 11.9239L19.9997 11.953L20 11.953L19.9992 12.3601L20 12.7674V12.7965V12.8256C19.055 12.8236 17.7969 13.4488 16.7026 14.3147C16.1662 14.7391 15.692 15.2032 15.3388 15.6403C14.9762 16.0891 14.7758 16.4669 14.7259 16.7204L13.8697 16.5519C13.9612 16.0873 14.27 15.5747 14.6601 15.0919C15.0596 14.5974 15.5818 14.0887 16.1611 13.6303C16.5415 13.3294 16.9572 13.0418 17.3888 12.7924L4 12.7674L4.00137 11.8948L17.3746 11.9198C16.9481 11.6723 16.5373 11.3878 16.1611 11.0901C15.5818 10.6318 15.0596 10.1231 14.6601 9.62855C14.27 9.14572 13.9612 8.63312 13.8697 8.16855L14.7259 8C14.7758 8.25348 14.9762 8.63132 15.3388 9.08012C15.692 9.51724 16.1662 9.98135 16.7026 10.4058Z" fill="#161010"/>
+                </svg>      
+              </span>
+            </span>
+          </a>
+        </div>
     {% endcase %}
   {% endfor %} 
 </div>
 
 <div class="pt-20 pb-16 px-4 md:px-8 md:pt-24 lg:px-10 lg:pb-[293px] lg:mb-[137px] lg:pt-[117px] relative">
-  <h3 class="relative z-[2] lg:max-w-[1030px] font-canela !font-light text-[40px] text-dark-txt leading-[110%] md:text-[56px] lg:text-[80px] lg:font-neue">Journey with us as we explore worlds near and far to bring you <span class="lg:font-canela lg:font-normal lg:italic">the uncommon</span></h3>
-  <img class="absolute top-0 right-10 hidden lg:!block" src="{{ section.settings.image_3 | image_url: width: '608' | prepend: 'https:'  }}" alt="{{ section.settings.image_3.alt }}">
+  <h3 class="relative z-[2] tracking-normal lg:max-w-[1032px] font-canela !font-light text-[40px] text-dark-txt leading-[110%] md:text-[56px] lg:text-[80px] lg:font-neue {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">Journey with us as we explore worlds near and far to bring you <span class="lg:font-canela lg:font-normal lg:italic">the uncommon</span></h3>
+  <img class="absolute top-0 right-10 hidden lg:!block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" src="{{ section.settings.image_3 | image_url: width: '608' | prepend: 'https:'  }}" alt="{{ section.settings.image_3.alt }}" data-cascade> 
 </div>
 
 {% schema %}
