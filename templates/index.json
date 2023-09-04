@@ -38,7 +38,11 @@
         "image": "shopify:\/\/shop_images\/lg-screen-img-1.png",
         "image_2": "shopify:\/\/shop_images\/sm-screen-img-1.png",
         "image_3": "shopify:\/\/shop_images\/plant.svg",
-        "image_overlay_opacity": 40,
+        "products": [
+          "kriti-rosemary-sea-salt",
+          "maroc-rose-pistachio-cardamom",
+          "uji-matcha-black-sesame"
+        ],
         "image_height": "large",
         "desktop_content_position": "bottom-center",
         "show_text_box": false,

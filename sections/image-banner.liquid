@@ -49,6 +49,16 @@
     z-index: 1;
   }
 
+  .collection--{{ section.id }}::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%; 
+    top: 100%;
+    left: 0%;
+    background-color: #161010;
+  }
+
   @media (min-width: 768px) {
     .banner--{{ section.id }} {
       height: 1024px;
@@ -60,7 +70,7 @@
       background-size: cover;
     }
   }
- 
+
   @media (min-width: 1024px) {
     .banner--{{ section.id }} {
       height: 1100px;
@@ -71,34 +81,72 @@
       background-repeat: no-repeat;
       background-size: cover;
     }
+
+    .collection--{{ section.id }}::after {
+      position: relative;
+      display: block;
+      margin-bottom: 8px;
+    }
   }
 {%- endstyle -%}
 
-<div class="relative w-full banner--{{ section.id }}">
-  <h1 class="relative z-[2] text-white pt-[132px] px-[14.5px] md:pt-[154px] md:px-7 lg:pt-[150px] text-5xl md:text-6xl lg:text-7xl text-center uppercase font-canela font-light tracking-normal scroll-trigger animate--slide-in" 
-    data-cascade style="--animation-order: 0;">Escape<br> the ordinary!</h1>
-  {% for block in section.blocks %}
-    {% case block.type %}
-      {% when 'buttons' %}
-        <div class="flex items-center justify-center">
-          <a href="{{ block.settings.button_link_1 }}" class="btn relative z-[2] scroll-trigger {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade> 
-            <span x-cloak class="btn-effect relative oveflow-hidden w-max flex items-center gap-x-2.5 border border-white rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-4">
-              <span class="btn-text font-light font-neue text-xl text-white">{{ block.settings.button_label_1 }}</span>
-              <span class="min-w-9 w-9 h-9 rounded-full bg-white grid place-items-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7026 10.4058C17.7969 11.2716 19.0547 11.8967 19.9997 11.8948L19.9998 11.9239L19.9997 11.953L20 11.953L19.9992 12.3601L20 12.7674V12.7965V12.8256C19.055 12.8236 17.7969 13.4488 16.7026 14.3147C16.1662 14.7391 15.692 15.2032 15.3388 15.6403C14.9762 16.0891 14.7758 16.4669 14.7259 16.7204L13.8697 16.5519C13.9612 16.0873 14.27 15.5747 14.6601 15.0919C15.0596 14.5974 15.5818 14.0887 16.1611 13.6303C16.5415 13.3294 16.9572 13.0418 17.3888 12.7924L4 12.7674L4.00137 11.8948L17.3746 11.9198C16.9481 11.6723 16.5373 11.3878 16.1611 11.0901C15.5818 10.6318 15.0596 10.1231 14.6601 9.62855C14.27 9.14572 13.9612 8.63312 13.8697 8.16855L14.7259 8C14.7758 8.25348 14.9762 8.63132 15.3388 9.08012C15.692 9.51724 16.1662 9.98135 16.7026 10.4058Z" fill="#161010"/>
-                </svg>      
+<div class="bg-latte">
+  <div class="relative w-full banner--{{ section.id }}">
+    <h1 class="relative z-[2] text-white pt-[132px] px-[14.5px] md:pt-[154px] md:px-7 lg:pt-[150px] text-5xl md:text-6xl lg:text-7xl text-center uppercase font-canela font-light tracking-normal scroll-trigger animate--slide-in" 
+      data-cascade style="--animation-order: 0;">Escape<br> the ordinary!</h1>
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'buttons' %}
+          <div class="flex items-center justify-center">
+            <a href="{{ block.settings.button_link_1 }}" class="btn relative z-[2] scroll-trigger {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade> 
+              <span x-cloak class="btn-effect relative oveflow-hidden w-max flex items-center gap-x-2.5 border border-white rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-4">
+                <span class="btn-text font-light font-neue text-xl text-white">{{ block.settings.button_label_1 }}</span>
+                <span class="min-w-9 w-9 h-9 rounded-full bg-white grid place-items-center">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7026 10.4058C17.7969 11.2716 19.0547 11.8967 19.9997 11.8948L19.9998 11.9239L19.9997 11.953L20 11.953L19.9992 12.3601L20 12.7674V12.7965V12.8256C19.055 12.8236 17.7969 13.4488 16.7026 14.3147C16.1662 14.7391 15.692 15.2032 15.3388 15.6403C14.9762 16.0891 14.7758 16.4669 14.7259 16.7204L13.8697 16.5519C13.9612 16.0873 14.27 15.5747 14.6601 15.0919C15.0596 14.5974 15.5818 14.0887 16.1611 13.6303C16.5415 13.3294 16.9572 13.0418 17.3888 12.7924L4 12.7674L4.00137 11.8948L17.3746 11.9198C16.9481 11.6723 16.5373 11.3878 16.1611 11.0901C15.5818 10.6318 15.0596 10.1231 14.6601 9.62855C14.27 9.14572 13.9612 8.63312 13.8697 8.16855L14.7259 8C14.7758 8.25348 14.9762 8.63132 15.3388 9.08012C15.692 9.51724 16.1662 9.98135 16.7026 10.4058Z" fill="#161010"/>
+                  </svg>      
+                </span>
               </span>
-            </span>
+            </a>
+          </div>
+      {% endcase %}
+    {% endfor %} 
+  </div>
+
+  <div class="pt-20 pb-16 px-4 md:px-8 md:pt-24 lg:px-10 lg:pb-[293px] lg:mb-[137px] lg:pt-[117px] relative">
+    <h3 class="relative z-[2] tracking-normal lg:max-w-[1032px] font-canela !font-light text-[40px] text-dark-txt leading-[110%] md:text-[56px] lg:text-[80px] lg:font-neue {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">Journey with us as we explore worlds near and far to bring you <span class="lg:font-canela lg:font-normal lg:italic">the uncommon</span></h3>
+    <img class="absolute top-0 right-10 hidden lg:!block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" src="{{ section.settings.image_3 | image_url: width: '608' | prepend: 'https:'  }}" alt="{{ section.settings.image_3.alt }}" data-cascade> 
+  </div>
+
+  <div class="px-4 md:px-8 lg:px-10 lg:pb-[145.92px]">
+    <div class="flex items-center lg:items-end justify-between w-full pb-[18px] md:pb-5 relative collection--{{ section.id }} lg:gap-[17px]">
+      <span class="font-xl font-neue uppercase text-dark-txt font-light whitespace-nowrap">Best Seller</span>
+      <a href="{{ shop.url | append: '/collections/all' }}" class="flex items-center gap-x-2 font-xl font-neue uppercase text-dark-txt font-light lg:hidden">
+        SEE ALL COOKIES
+        <span class="grid place-items-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.7026 8.40576C15.7969 9.27158 17.0547 9.89674 17.9997 9.89478L17.9998 9.92389L17.9997 9.95298L18 9.95298L17.9992 10.3601L18 10.7674V10.7965V10.8256C17.055 10.8236 15.7969 11.4488 14.7026 12.3147C14.1662 12.7391 13.692 13.2032 13.3388 13.6403C12.9762 14.0891 12.7758 14.4669 12.7259 14.7204L11.8697 14.5519C11.9612 14.0873 12.27 13.5747 12.6601 13.0919C13.0596 12.5974 13.5818 12.0887 14.1611 11.6303C14.5415 11.3294 14.9572 11.0418 15.3888 10.7924L2 10.7674L2.00137 9.89481L15.3746 9.91978C14.9481 9.67231 14.5373 9.38776 14.1611 9.09012C13.5818 8.63176 13.0596 8.12307 12.6601 7.62855C12.27 7.14572 11.9612 6.63312 11.8697 6.16855L12.7259 6C12.7758 6.25348 12.9762 6.63132 13.3388 7.08012C13.692 7.51724 14.1662 7.98135 14.7026 8.40576Z" fill="#161010"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+    <div class="grid lg:grid-cols-3 lg:gap-x-5 pt-12 md:pt-16 lg:pt-[101px]">
+      {% for product in section.settings.products %}
+        {% assign idx = forloop.index | modulo: 2 %}
+        <div class="{% if idx == 0 %}lg:pt-[106px]{% endif %} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} cursor" data-cascade x-cloak>
+          <a href="{{ product.url }}">
+            <img src="{{ product.metafields.custom.feature_image.value | img_url: 'grande' | prepend: 'https:' }}" alt="" class="w-full object-cover aspect-[6/4] h-[438px] md:h-[899px] lg:h-[562px]">
+            <div class="pt-3 md:pt-4 lg:pt-5 {% unless forloop.last %}pb-9 md:pb-20{% endunless %} grid md:grid-cols-2">
+              <p class="font-neue text-dark-txt text-[28px] md:text-[32px] lg:font-medium leading-[120%] mb-1 md:mb-2 lg:mb-[6px]">{{ product.title | split: ' ' | first }}</p>
+              <p class="font-neue text-dark-txt text-[28px] md:text-[32px] lg:font-medium leading-[120%] mb-2 lg:row-start-1 lg:col-start-2 lg:text-right">{{ product.price | money }}</p>
+              <p class="font-canela italic text-dark-txt text-[24px] lg:font-neue lg:not-italic lg:font-base leading-[120%] md:row-start-1 md:col-start-2 md:text-right lg:!hidden">{{ product.tags | join: ', ' | prepend: '&#40;' | append: '&#41;' }}</p>
+              <p class="font-neue text-dark-txt text-base hidden lg:!block leading-[120%] lg:row-start-2 lg:col-start-1 lg:col-span-2 lg:text-left">{{ product.tags | join: ' ' }}</p>
+            </div>
           </a>
         </div>
-    {% endcase %}
-  {% endfor %} 
-</div>
-
-<div class="pt-20 pb-16 px-4 md:px-8 md:pt-24 lg:px-10 lg:pb-[293px] lg:mb-[137px] lg:pt-[117px] relative">
-  <h3 class="relative z-[2] tracking-normal lg:max-w-[1032px] font-canela !font-light text-[40px] text-dark-txt leading-[110%] md:text-[56px] lg:text-[80px] lg:font-neue {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">Journey with us as we explore worlds near and far to bring you <span class="lg:font-canela lg:font-normal lg:italic">the uncommon</span></h3>
-  <img class="absolute top-0 right-10 hidden lg:!block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" src="{{ section.settings.image_3 | image_url: width: '608' | prepend: 'https:'  }}" alt="{{ section.settings.image_3.alt }}" data-cascade> 
+      {% endfor %} 
+    </div>
+  </div>
 </div>
 
 {% schema %}
@@ -126,14 +174,9 @@
       "label": "image 3"
     },
     {
-      "type": "range",
-      "id": "image_overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
-      "default": 0
+      "type": "product_list",
+      "id": "products",
+      "label": "Products"
     },
     {
       "type": "select",
