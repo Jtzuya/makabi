@@ -947,6 +947,10 @@ video {
     height: 110px;
   }
 
+  .lg\:h-\[1100px\] {
+    height: 1100px;
+  }
+
   .lg\:w-58 {
     width: 235.67px;
   }

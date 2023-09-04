@@ -29,8 +29,8 @@
   }
 
   .banner--{{ section.id }} {
+    height: 812px;
     width: 100%;
-    height: 100vh;
     background: url({{ section.settings.image_2 | image_url: width: '768' | prepend: 'https:' }});
     background-attachment: fixed;
     background-position: center;
@@ -51,17 +51,21 @@
 
   @media (min-width: 768px) {
     .banner--{{ section.id }} {
+      height: 1024px;
+      width: 100%;
       background: url({{ section.settings.image | image_url: width: '1024' | prepend: 'https:' }});
-      background-attachment: fixed;
+      /* background-attachment: fixed; */
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
     }
   }
-
+ 
   @media (min-width: 1024px) {
     .banner--{{ section.id }} {
-      background: url({{ section.settings.image | image_url: width: '1600' | prepend: 'https:' }});
+      height: 1100px;
+      width: 100%;
+      background: url({{ section.settings.image | image_url: width: '1440' | prepend: 'https:' }});
       background-attachment: fixed;
       background-position: center;
       background-repeat: no-repeat;
@@ -70,7 +74,7 @@
   }
 {%- endstyle -%}
 
-<div class="relative w-full h-[812px] md:h-[1024px] lg:h-[110px] banner--{{ section.id }}">
+<div class="relative w-full banner--{{ section.id }}">
   <h1 class="relative z-[2] text-white pt-[132px] px-[14.5px] md:pt-[154px] md:px-7 lg:pt-[150px] text-5xl md:text-6xl lg:text-7xl text-center uppercase font-canela font-light tracking-normal scroll-trigger animate--slide-in" 
     data-cascade style="--animation-order: 0;">Escape<br> the ordinary!</h1>
   {% for block in section.blocks %}
