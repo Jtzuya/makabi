@@ -23,16 +23,19 @@ module.exports = {
       colors: {
         'latte': '#EBE8E3',
         'dark-txt': '#161010',
-        'header-dark-txt': '#161010'
+        'dark-link': '#191414',
+        'header-dark-txt': '#161010',
       },
       fontFamily: {
         'neue': 'neue',
         'canela': 'canela'
       },
       fontSize: {
+        '4xl': '40px',
         '5xl': '46px',
         '6xl': '96px',
-        '7xl': '140px'
+        '7xl': '140px',
+        '8xl': '80px'
       }
     },
   },

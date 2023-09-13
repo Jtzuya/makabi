@@ -126,166 +126,168 @@
     assign localization_forms = true
   endif
 -%}
-<div x-data="{'atTop': false}">
-  <header 
-    class="transition-all fixed inset-0 grid grid-cols-4 place-items-center z-20 w-full h-[60px] px-4 md:px-8 xl:px-10 md:h-[58px] xl:h[69px] xl:border-b-[1px] border-white bg-transparent"
-    :class="{'bg-transparent': !atTop, 'bg-latte border-latte': atTop}"
-    @scroll.window="atTop = (window.pageYOffset < 90) ? false : true"
-  >
-    <div x-data="{'showMobileMenu': false}" class="w-full flex justify-start items-center gap-x-8">
-      <a href="{{ section.settings.menu.links[2].url }}" 
-        class="whitespace-nowrap text-base hidden md:!block md:text-lg xl:text-xl font-neue {% if template.name != 'index' %}text-dark-txt{% else %}text-white{% endif  %}"
-        
-        {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
-        >{{ section.settings.menu.links[2].title }}</a>
-      <a href="{{ section.settings.menu.links[3].url }}" 
-        class="whitespace-nowrap text-base hidden md:!block md:text-lg xl:text-xl font-neue {% if template.name == 'index' %}text-white{% else %}!text-dark-txt{% endif  %}"
-        
-        {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
-        >{{ section.settings.menu.links[3].title }}</a>
-
-      <button 
-        @click="showMobileMenu = showMobileMenu != true ? true : false; console.log(showMobileMenu)"
-        class="text-base md:hidden md:text-lg xl:text-xl font-neue {% if template.name != 'index' %}text-dark-txt{% else %}text-white{% endif  %}"
-        
-        {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
-        >Menu</button>
-      {%- render 'header-mega-menu' %}
-    </div>
-  
-    <a href="{{ routes.root_url }}" class="col-span-2">
-      {%- if settings.logo != blank -%}
-      <div class="relative grid place-items-center"
-          :class="{'grid': !atTop, 'hidden': atTop}">
-          {% assign logo = settings.logo %}
-          {% if template.name != 'index' %}{% assign logo = settings.logo_dark %}{% endif  %}
-  
-          {%- assign logo_alt = logo | default: shop.name | escape -%}
-          {%- assign logo_height = settings.logo_width | divided_by: logo.aspect_ratio -%}
-          {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-          {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-          {{ logo | image_url: width: 600 | image_tag:
-            class: 'header__heading-logo motion-reduce w-34 md:w-38 lg:w-58',
-            widths: widths,
-            height: logo_height,
-            width: settings.logo_width,
-            alt: logo_alt,
-            sizes: sizes,
-            preload: true
-          }}
-        </div>
-        <div class="relative place-items-center hidden" :class="{'hidden': !atTop, 'grid': atTop}">
-          {% assign logo_dark = settings.logo_dark %}
-          {%- assign logo_height = settings.logo_width | divided_by: logo.aspect_ratio -%}
-          {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-          {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-          {{ logo_dark | image_url: width: 600 | image_tag:
-            class: 'header__heading-logo motion-reduce w-34 md:w-38 lg:w-58',
-            widths: widths,
-            height: logo_height,
-            width: settings.logo_width,
-            alt: logo_alt,
-            sizes: sizes,
-            preload: true
-          }}
-        </div>
-      {%- else -%}
-        <span class="h2" 
-              
-            {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
-              >{{ shop.name }}</span>
-      {%- endif -%}
-    </a>
-  
-    <div class="{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %} w-full flex justify-end items-center">
-      <div class="desktop-localization-wrapper">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <noscript class="small-hide medium-hide">
-            {%- form 'localization', id: 'HeaderCountryMobileFormNoScript', class: 'localization-form' -%}
-              <div class="localization-form__select">
-                <h2 class="visually-hidden" id="HeaderCountryMobileLabelNoScript">{{ 'localization.country_label' | t }}</h2>
-                <select class="localization-selector link" name="country_code" aria-labelledby="HeaderCountryMobileLabelNoScript">
-                  {%- for country in localization.available_countries -%}
-                    <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
-                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
-              </div>
-              <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
-            {%- endform -%}
-          </noscript>
-  
-          <localization-form class="small-hide medium-hide no-js-hidden">
-            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {% endif %}
-  
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <noscript class="small-hide medium-hide">
-            {%- form 'localization', id: 'HeaderLanguageMobileFormNoScript', class: 'localization-form' -%}
-              <div class="localization-form__select">
-                <h2 class="visually-hidden" id="HeaderLanguageMobileLabelNoScript">{{ 'localization.language_label' | t }}</h2>
-                <select class="localization-selector link" name="locale_code" aria-labelledby="HeaderLanguageMobileLabelNoScript">
-                  {%- for language in localization.available_languages -%}
-                    <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                      {{ language.endonym_name | capitalize }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
-              </div>
-              <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
-            {%- endform -%}
-          </noscript>
-  
-          <localization-form class="small-hide medium-hide no-js-hidden">
-            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div>
-  
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
-          {% render 'icon-account' %}
-          <span class="visually-hidden">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
-          </span>
-        </a>
-      {%- endif -%}
-  
-      <div class="flex justify-start items-center gap-x-8">
-        <a href="{{ section.settings.menu.links[0].url }}" 
+<div class="max-w-screen-2xl ml-auto mr-auto">
+  <div x-data="{'atTop': false}">
+    <header 
+      class="transition-all fixed inset-0 grid grid-cols-4 place-items-center z-20 w-full h-[60px] px-4 md:px-8 xl:px-10 md:h-[58px] xl:h[69px] xl:border-b-[1px] border-white bg-transparent"
+      :class="{'bg-transparent': !atTop, 'bg-latte border-latte': atTop}"
+      @scroll.window="atTop = (window.pageYOffset < 90) ? false : true"
+    >
+      <div x-data="{'showMobileMenu': false}" class="w-full flex justify-start items-center gap-x-8">
+        <a href="{{ section.settings.menu.links[2].url }}" 
           class="whitespace-nowrap text-base hidden md:!block md:text-lg xl:text-xl font-neue {% if template.name != 'index' %}text-dark-txt{% else %}text-white{% endif  %}"
           
           {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
-          >{{ section.settings.menu.links[0].title }}</a>
-
-        <button 
-          class="text-base md:text-lg xl:text-xl font-neue {% if template.name != 'index' %}text-dark-txt{% else %}text-white{% endif  %}"
+          >{{ section.settings.menu.links[2].title }}</a>
+        <a href="{{ section.settings.menu.links[3].url }}" 
+          class="whitespace-nowrap text-base hidden md:!block md:text-lg xl:text-xl font-neue {% if template.name == 'index' %}text-white{% else %}!text-dark-txt{% endif  %}"
           
           {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
-          >Cart &#40;{{ cart.item_count }}&#41;</button>
+          >{{ section.settings.menu.links[3].title }}</a>
+
+        <button 
+          @click="showMobileMenu = showMobileMenu != true ? true : false; console.log(showMobileMenu)"
+          class="text-base md:hidden md:text-lg xl:text-xl font-neue {% if template.name != 'index' %}text-dark-txt{% else %}text-white{% endif  %}"
+          
+          {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
+          >Menu</button>
+        {%- render 'header-mega-menu' %}
       </div>
-    </div>
-  </header>
+    
+      <a href="{{ routes.root_url }}" class="col-span-2">
+        {%- if settings.logo != blank -%}
+        <div class="relative grid place-items-center"
+            :class="{'grid': !atTop, 'hidden': atTop}">
+            {% assign logo = settings.logo %}
+            {% if template.name != 'index' %}{% assign logo = settings.logo_dark %}{% endif  %}
+    
+            {%- assign logo_alt = logo | default: shop.name | escape -%}
+            {%- assign logo_height = settings.logo_width | divided_by: logo.aspect_ratio -%}
+            {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+            {{ logo | image_url: width: 600 | image_tag:
+              class: 'header__heading-logo motion-reduce w-34 md:w-38 lg:w-58',
+              widths: widths,
+              height: logo_height,
+              width: settings.logo_width,
+              alt: logo_alt,
+              sizes: sizes,
+              preload: true
+            }}
+          </div>
+          <div class="relative place-items-center hidden" :class="{'hidden': !atTop, 'grid': atTop}">
+            {% assign logo_dark = settings.logo_dark %}
+            {%- assign logo_height = settings.logo_width | divided_by: logo.aspect_ratio -%}
+            {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+            {{ logo_dark | image_url: width: 600 | image_tag:
+              class: 'header__heading-logo motion-reduce w-34 md:w-38 lg:w-58',
+              widths: widths,
+              height: logo_height,
+              width: settings.logo_width,
+              alt: logo_alt,
+              sizes: sizes,
+              preload: true
+            }}
+          </div>
+        {%- else -%}
+          <span class="h2" 
+                
+              {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
+                >{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    
+      <div class="{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %} w-full flex justify-end items-center">
+        <div class="desktop-localization-wrapper">
+          {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+            <noscript class="small-hide medium-hide">
+              {%- form 'localization', id: 'HeaderCountryMobileFormNoScript', class: 'localization-form' -%}
+                <div class="localization-form__select">
+                  <h2 class="visually-hidden" id="HeaderCountryMobileLabelNoScript">{{ 'localization.country_label' | t }}</h2>
+                  <select class="localization-selector link" name="country_code" aria-labelledby="HeaderCountryMobileLabelNoScript">
+                    {%- for country in localization.available_countries -%}
+                      <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+                <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
+              {%- endform -%}
+            </noscript>
+    
+            <localization-form class="small-hide medium-hide no-js-hidden">
+              {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                  {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {% endif %}
+    
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+            <noscript class="small-hide medium-hide">
+              {%- form 'localization', id: 'HeaderLanguageMobileFormNoScript', class: 'localization-form' -%}
+                <div class="localization-form__select">
+                  <h2 class="visually-hidden" id="HeaderLanguageMobileLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+                  <select class="localization-selector link" name="locale_code" aria-labelledby="HeaderLanguageMobileLabelNoScript">
+                    {%- for language in localization.available_languages -%}
+                      <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                        {{ language.endonym_name | capitalize }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+                <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
+              {%- endform -%}
+            </noscript>
+    
+            <localization-form class="small-hide medium-hide no-js-hidden">
+              {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                  {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
+        </div>
+    
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
+            {% render 'icon-account' %}
+            <span class="visually-hidden">
+              {%- liquid
+                if customer
+                  echo 'customer.account_fallback' | t
+                else
+                  echo 'customer.log_in' | t
+                endif
+              -%}
+            </span>
+          </a>
+        {%- endif -%}
+    
+        <div class="flex justify-start items-center gap-x-8">
+          <a href="{{ section.settings.menu.links[0].url }}" 
+            class="whitespace-nowrap text-base hidden md:!block md:text-lg xl:text-xl font-neue {% if template.name != 'index' %}text-dark-txt{% else %}text-white{% endif  %}"
+            
+            {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
+            >{{ section.settings.menu.links[0].title }}</a>
+
+          <button 
+            class="text-base md:text-lg xl:text-xl font-neue {% if template.name != 'index' %}text-dark-txt{% else %}text-white{% endif  %}"
+            
+            {% if template.name == 'index' %}:class="{'text-white': !atTop, 'text-header-dark-txt': atTop}"{% endif %}
+            >Cart &#40;{{ cart.item_count }}&#41;</button>
+        </div>
+      </div>
+    </header>
+  </div>
 </div>
 
 {%- if settings.cart_type == "notification" -%}
@@ -295,7 +297,7 @@
 {% javascript %}
   class StickyHeader extends HTMLElement {
     constructor() {
-      super();
+      super();  
     }
 
     connectedCallback() {

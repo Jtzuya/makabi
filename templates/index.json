@@ -38,6 +38,7 @@
         "image": "shopify:\/\/shop_images\/lg-screen-img-1.png",
         "image_2": "shopify:\/\/shop_images\/sm-screen-img-1.png",
         "image_3": "shopify:\/\/shop_images\/plant.svg",
+        "image_4": "shopify:\/\/shop_images\/illustration_1.svg",
         "products": [
           "kriti-rosemary-sea-salt",
           "maroc-rose-pistachio-cardamom",
@@ -56,6 +57,7 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
@@ -110,6 +112,7 @@
         "product",
         "collection-1"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Multimedia collage",
         "heading_size": "h2",
@@ -123,6 +126,7 @@
     },
     "video": {
       "type": "video",
+      "disabled": true,
       "settings": {
         "heading": "",
         "heading_size": "h1",
@@ -171,6 +175,7 @@
         "column2",
         "column3"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
