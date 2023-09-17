@@ -36,6 +36,9 @@ module.exports = {
         '6xl': '96px',
         '7xl': '140px',
         '8xl': '80px'
+      },
+      screens: {
+        '2xl': '1440px'
       }
     },
   },

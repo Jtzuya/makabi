@@ -76,6 +76,8 @@
 
   .banner--2-img--{{ section.id }}{
     height: 132.27px;
+    max-width: 196px;
+    margin: 0 auto;
     background: url('{{ section.settings.image_6 | image_url: width: '196' | prepend: 'https:' }}');
     width: 100%;
     background-repeat: no-repeat;
@@ -96,10 +98,13 @@
 
     .banner--2-img--{{ section.id }}{
       height: 182.35px;
+      max-width: 270px;
+      margin: 0 auto;
       background: url('{{ section.settings.image_6 | image_url: width: '270' | prepend: 'https:' }}');
       width: 100%;
       background-repeat: no-repeat;
       background-position: center;
+      background-size: contain;
     }
   }
 
@@ -126,11 +131,13 @@
 
     .banner--2-img--{{ section.id }}{
       height: 243.81px;
-      background: url('{{ section.settings.image_6 | image_url: width: '243.81' | prepend: 'https:' }}');
-      background-repeat: no-repeat;
+      max-width: 361px;
+      margin: 0 auto;
+      background: url('{{ section.settings.image_6 | image_url: width: '361' | prepend: 'https:' }}');
       width: 100%;
       background-repeat: no-repeat;
       background-position: center;
+      background-size: contain;
     }
 
     .collection--{{ section.id }}::after {
@@ -262,7 +269,7 @@
       {% for product in section.settings.products %}
         <a href="{{ product.url }}" class="block relative md:w-[568px] mx-auto group">
           <p class="relative font-canela text-center text-dark-link text-4xl cursor-pointer mb-3 uppercase md:text-8xl group-hover:italic {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade>{{ product.title | split: ' ' | first }}</p>
-          <div class="absolute left-full top-1/2 -translate-y-1/2 translate-x-16 opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-x-0">
+          <div class="absolute hidden xl:!block left-full top-1/2 -translate-y-1/2 translate-x-16 opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-x-0">
             <span class="grid place-items-center w-[229px] h-[344px]">
               <img
                 class="cover"
@@ -334,10 +341,23 @@
   {% endstyle %}
   <div class="flex flex-col justify-between gap-16 py-20 px-4 md:px-[32px] md:py-[120px] lg:py-[86px] lg:px-10 lg:flex-row">
     <div class="flex-1 w-full">
-      <span class="block rich-img-sm--{{ section.id }}">&nbsp;</span>
-      <h3 class="font-canela text-center text-dark-txt uppercase text-[40px] pt-8 max-w-[343px] mx-auto md:text-[80px] md:pt-11 md:max-w-[522px]">DISCOVER OUR STORY</h3>
+      <span class="block rich-img-sm--{{ section.id }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade>&nbsp;</span>
+      <h3 class="font-canela text-center text-dark-txt uppercase text-[40px] pt-8 max-w-[343px] mx-auto md:text-[80px] md:pt-11 md:max-w-[522px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade>DISCOVER OUR STORY</h3>
+      <p class="font-neue text-dark-txt text-center max-w-[343px] mx-auto text-[20px] md:max-w-[472px] pt-5 lg:pt-[25px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade>Our passion for baking is reflected in every recipe we craft, using only the finest ingredients and time-honored techniques to create an exceptional taste experience.</p>
+      <div class="flex items-center justify-center" data-cascade>
+        <a href="/collections/all" class="btn relative z-[2] scroll-trigger animate--slide-in" data-cascade="" style="--animation-order: 0;">
+          <span class="btn-effect before:bg-dark-txt before:scale-1 relative oveflow-hidden w-max flex items-center gap-x-2.5 border border-dark-txt rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-9 lg:mt-[45px]">
+            <span class="btn-text font-light font-neue text-xl text-dark-txt">Read our story</span>
+            <span class="min-w-9 w-9 h-9 rounded-full bg-dark-txt grid place-items-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7026 10.4058C17.7969 11.2716 19.0547 11.8967 19.9997 11.8948L19.9998 11.9239L19.9997 11.953L20 11.953L19.9992 12.3601L20 12.7674V12.7965V12.8256C19.055 12.8236 17.7969 13.4488 16.7026 14.3147C16.1662 14.7391 15.692 15.2032 15.3388 15.6403C14.9762 16.0891 14.7758 16.4669 14.7259 16.7204L13.8697 16.5519C13.9612 16.0873 14.27 15.5747 14.6601 15.0919C15.0596 14.5974 15.5818 14.0887 16.1611 13.6303C16.5415 13.3294 16.9572 13.0418 17.3888 12.7924L4 12.7674L4.00137 11.8948L17.3746 11.9198C16.9481 11.6723 16.5373 11.3878 16.1611 11.0901C15.5818 10.6318 15.0596 10.1231 14.6601 9.62855C14.27 9.14572 13.9612 8.63312 13.8697 8.16855L14.7259 8C14.7758 8.25348 14.9762 8.63132 15.3388 9.08012C15.692 9.51724 16.1662 9.98135 16.7026 10.4058Z" fill="white"></path>
+              </svg>
+            </span>
+          </span>
+        </a>
+      </div>
     </div>
-    <div class="rich-img-lg--{{ section.id }}">&nbsp;</div>
+    <div class="rich-img-lg--{{ section.id }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade>&nbsp;</div>
   </div>
 </div>
 
