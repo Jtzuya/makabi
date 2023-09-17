@@ -740,6 +740,9 @@ video {
 .gap-8 {
   gap: 2rem;
 }
+.gap-4 {
+  gap: 1rem;
+}
 .gap-x-2 {
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
@@ -751,6 +754,10 @@ video {
 .gap-x-8 {
   -moz-column-gap: 2rem;
        column-gap: 2rem;
+}
+.gap-x-5 {
+  -moz-column-gap: 1.25rem;
+       column-gap: 1.25rem;
 }
 .truncate {
   overflow: hidden;
@@ -919,6 +926,10 @@ video {
   font-size: 1rem;
   line-height: 1.5rem;
 }
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -926,10 +937,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 .\!font-light {
   font-weight: 300 !important;
@@ -1085,10 +1092,6 @@ video {
     display: block !important;
   }
 
-  .md\:block {
-    display: block;
-  }
-
   .md\:hidden {
     display: none;
   }
@@ -1168,14 +1171,18 @@ video {
     padding-right: 32px;
   }
 
+  .md\:py-10 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
   .md\:py-\[120px\] {
     padding-top: 120px;
     padding-bottom: 120px;
   }
 
-  .md\:py-10 {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+  .md\:pb-16 {
+    padding-bottom: 4rem;
   }
 
   .md\:pb-20 {
@@ -1230,6 +1237,10 @@ video {
     font-size: 80px;
   }
 
+  .md\:text-\[18px\] {
+    font-size: 18px;
+  }
+
   .md\:text-\[32px\] {
     font-size: 32px;
   }
@@ -1240,6 +1251,10 @@ video {
 
   .md\:text-\[80px\] {
     font-size: 80px;
+  }
+
+  .md\:text-\[96px\] {
+    font-size: 96px;
   }
 
   .md\:text-lg {
@@ -1255,10 +1270,6 @@ video {
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .md\:text-\[18px\] {
-    font-size: 18px;
   }
 }
 @media (min-width: 1024px) {
@@ -1350,6 +1361,10 @@ video {
     padding-bottom: 86px;
   }
 
+  .lg\:\!pb-6 {
+    padding-bottom: 1.5rem !important;
+  }
+
   .lg\:pb-48 {
     padding-bottom: 12rem;
   }
@@ -1386,14 +1401,6 @@ video {
     padding-top: 25px;
   }
 
-  .lg\:pb-6 {
-    padding-bottom: 1.5rem;
-  }
-
-  .lg\:\!pb-6 {
-    padding-bottom: 1.5rem !important;
-  }
-
   .lg\:text-left {
     text-align: left;
   }
@@ -1414,12 +1421,12 @@ video {
     font-size: 140px;
   }
 
-  .lg\:text-\[80px\] {
-    font-size: 80px;
-  }
-
   .lg\:text-\[20px\] {
     font-size: 20px;
+  }
+
+  .lg\:text-\[80px\] {
+    font-size: 80px;
   }
 
   .lg\:font-medium {
@@ -1464,16 +1471,8 @@ video {
 }
 @media (min-width: 1440px) {
 
-  .\32xl\:block {
-    display: block;
-  }
-
   .\32xl\:\!block {
     display: block !important;
-  }
-
-  .\32xl\:hidden {
-    display: none;
   }
 
   .\32xl\:\!hidden {
