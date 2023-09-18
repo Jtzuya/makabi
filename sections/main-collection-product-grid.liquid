@@ -34,7 +34,7 @@
 <div class="px-4 md:px-8 lg:px-10">
   <h1 class="font-canela text-center text-dark-txt uppercase text-[46px] pb-12 md:text-[96px] md:pb-16">Cookies</h1>
 
-  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-5">
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-5 max-w-[1440px] mx-auto">
     {% for product in collection.products %}
       {% if product.metafields.custom.feature_image.value != blank %}
         <div
@@ -48,7 +48,7 @@
               width="auto"
               src="{% if product.metafields.custom.feature_image.value != blank %}{{ product.metafields.custom.feature_image.value | img_url: 'grande' | prepend: 'https:' }}{% else %}{{ product.images[0] | img_url: 'grande' | prepend: 'https:' }}{% endif %}"
               alt=""
-              class="w-full object-cover aspect-[6/4] h-[438px] md:h-[899px] lg:h-[562px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              class="w-full object-cover aspect-[6/4] h-[438px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
               data-cascade>
             <div class="pt-3 md:pt-4 lg:pt-5 {% unless forloop.last %}pb-9 md:pb-20{% endunless %} grid md:grid-cols-2">
               <p class="font-neue text-dark-txt text-[28px] md:text-[32px] lg:font-medium leading-[120%] mb-1 md:mb-2 lg:mb-[6px]">{{ product.title | split: ' ' | first }}</p>

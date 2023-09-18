@@ -687,6 +687,9 @@ video {
 .max-w-screen-2xl {
   max-width: 1440px;
 }
+.max-w-\[1440px\] {
+  max-width: 1440px;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1106,6 +1109,18 @@ video {
 
   .md\:h-auto {
     height: auto;
+  }
+
+  .md\:h-\[342px\] {
+    height: 342px;
+  }
+
+  .md\:\!h-\[342px\] {
+    height: 342px !important;
+  }
+
+  .md\:h-\[437px\] {
+    height: 437px;
   }
 
   .md\:w-38 {
