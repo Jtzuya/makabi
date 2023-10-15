@@ -1,0 +1,262 @@
+@font-face {
+    font-family: 'canela';
+    font-style: italic;
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/canela-light-italic.woff2?v=1693500533") format("woff2");
+}
+
+@font-face {
+    font-family: 'canela';
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/canela-light.woff2?v=1693500534") format("woff2");
+}
+
+@font-face {
+    font-family: 'neue';
+    font-weight: 500;
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/neue-medium.woff2?v=1693500638") format("woff2");
+}
+
+@font-face {
+    font-family: 'neue';
+    font-weight: 400;
+    src: url("https://cdn.shopify.com/s/files/1/1737/4539/files/neue-book.woff2?v=1693500632") format("woff2");
+}
+
+.navBar{
+    position: absolute;
+    background-color: #EBE8E3;
+    right: 0;
+    height: 100vh;
+}
+.topBar{
+    padding-bottom: 11.51px;
+    border-bottom: 1px solid black;
+    letter-spacing: 4%;
+    font-weight: 500;
+    margin-left: 16.35px;
+    margin-right: 16.35px;
+    padding-top: 16.35px;
+}
+.barList,.item1,.item2,.item3,.item1Left,.item2Left,.item3Left,.operation{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+.items{
+    padding-left: 16.35px;
+    padding-right: 16.35px;
+}
+.item1,.item2,.item3{
+    padding-top: 20.44px;
+    padding-bottom: 20.44px;
+    border-bottom: 1px solid black;
+}
+.name-operation,.item1Right,.item2Right,.item3Right{
+    display: grid;
+    align-content: space-between;
+    text-align: end;
+}
+.name-operation{
+    padding-left: 8.175px;
+}
+.price1{
+    font-weight: 375;
+    font-size: 24.5px;
+    text-transform: uppercase;
+    color: #161010;
+}
+.quantity{
+    font-weight: 400;
+    font-size: 16.3486px;
+    text-align: center;
+    color: #161010;
+}
+.operation{
+    align-items: center;
+    display: flex;
+    justify-content: space-between
+}
+
+/*-----------------------------------Footer--------------------------------------*/
+.divider{
+    border-bottom: 1px solid #161010;
+}
+.topFooterList{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin-left: 16.35px;
+    margin-right: 16.35px;
+    padding-top: 8.17px;
+}
+.topFooterList .footerList1{
+    font-weight: 375;
+    font-size: 20.4px;
+    color: #161010;
+    font-family: 'neue';
+}
+.topFooterList .footerList2{
+    font-weight: 375;
+    font-size: 20.4px;
+    text-align: right;
+    text-transform: uppercase;
+    color: #161010;
+
+}
+.centerFooter{
+    padding-top: 7.7px;
+    padding-bottom: 19.85px;
+    margin-left: 16.35px;
+    margin-right: 16.35px;
+    font-weight: 375;
+    font-size: 16.3486px;
+    color: #8D8583;
+}
+
+.btnCon{
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 20.44px;
+}
+.btn{
+    background: #161010;
+    width: 342.3px;
+    height: 53.13px;
+    border-radius: 102.179px;
+    border-style: none;
+    font-weight: 500;
+    font-size: 20.4357px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/*----------------------------------@MEDIA-------------------------------------------------------*/
+
+@media (min-width:425px){
+    body{
+        margin: 0;
+        padding: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    .navBar{
+        position: absolute;
+        background-color: #EBE8E3;
+        right: 0;
+        width: 400px;
+    }
+    .btn{
+        background: #161010;
+        width: 367.3px;
+        height: 53.13px;
+        border-radius: 102.179px;
+        border-style: none;
+        font-weight: 500;
+        font-size: 20.4357px;
+        text-align: center;
+        color: #FFFFFF;
+}
+    .btnCon{
+        padding-left: 16.35px;
+        padding-bottom: 20.44px;
+    }
+}
+/*----------------------------------@MEDIA TABLET-------------------------------------------------------*/
+@media (min-width:768px){
+    .navBar{
+        position: absolute;
+        background-color: #EBE8E3;
+        right: 0;
+        width: 600px;
+    }
+    .btn{
+        background: #161010;
+        width: 534.6px;
+        height: 53.13px;
+        border-radius: 102.179px;
+        border-style: none;
+        font-weight: 500;
+        font-size: 20.4357px;
+        text-align: center;
+        color: #FFFFFF;
+}
+    .topFooterList{
+        margin-left: 32.7px;
+        margin-right: 32.7px;
+        padding-top: 16.35px;
+}
+
+    .centerFooter{
+        margin-left: 32.7px;
+        margin-right: 32.7px;
+}
+    .items{
+        padding-left: 32.7px;
+        padding-right: 32.7px;
+}
+    .topBar{
+        padding-bottom: 23.02px;
+        border-bottom: 1px solid black;
+        margin-left: 32.7px;
+        margin-right: 32.7px;
+        padding-top: 32.7px;
+
+}
+     .btnCon{
+        padding-left: 32.7px;
+        padding-right: 32.7px;
+        padding-bottom: 20.44px;
+}
+    .name-operation{
+        padding-left: 16.35px;
+}
+}
+/*----------------------------------@MEDIA  LAPTOP-------------------------------------------------------*/
+@media (min-width:1440px) {
+
+    .navBar{
+        position: absolute;
+        background-color: #EBE8E3;
+        right: 0;
+        width: 768px;
+    }
+    .btn{
+        background: #161010;
+        width: 702.6px;
+        height: 53.13px;
+        border-radius: 102.179px;
+        border-style: none;
+        font-weight: 500;
+        font-size: 20.4357px;
+        text-align: center;
+        color: #FFFFFF;
+}
+    .topFooterList{
+        margin-left: 32.7px;
+        margin-right: 32.7px;
+        padding-top: 16.35px;
+}
+
+    .centerFooter{
+        margin-left: 32.7px;
+        margin-right: 32.7px;
+}
+    .items{
+        padding-left: 32.7px;
+        padding-right: 32.7px;
+}
+    .topBar{
+        padding-bottom: 23.02px;
+        border-bottom: 1px solid black;
+        margin-left: 32.7px;
+        margin-right: 32.7px;
+        padding-top: 32.7px;
+
+}
+     .btnCon{
+        padding-left: 32.7px;
+        padding-right: 32.7px;
+        padding-bottom: 20.44px;
+}
+    .name-operation{
+        padding-left: 16.35px;
+}
+}

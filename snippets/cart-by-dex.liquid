@@ -1,0 +1,76 @@
+<!-- cart drawer backdrop -->
+<div onclick="cartHandler()" class="duration-700 transition-all fixed top-0 -right-full w-full h-screen z-20" x-ref="cartDrawer" data-cart-drawer="false" style="background-color: rgba(0,0,0,50%);">&nbsp;</div>
+
+<div class="fixed duration-500 transition-all delay-50 top-0 -right-full w-full max-w-[607.96px] h-screen bg-[#EBE8E3] z-50" x-ref="cartDrawer" data-cart-drawer="false">
+    <div class="flex flex-col h-screen justify-between">
+        <div style="--side: 32.7px; max-width: calc(100% - (var(--side) + var(--side)));" class="mx-auto w-full">
+            <!-- cart heading -->
+            <div class="flex justify-between items-center pt-[32.7px] pb-[23.02px]" style="border-bottom: 1px solid #000000;">
+                <p class="font-neue font-medium">Cart &#40;{{ cart.item_count }}&#41;</p>
+                <span class="grid place-items-center relative before:absolute before:content-none before:left-0 before:top-0 before:w-full before:h-full before:z-10 before:cusor-pointer" onclick="cartHandler()">
+                    <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.4146 11.514L17.4721 6.45642L18.9172 7.90144L13.8596 12.959L18.9172 18.0166L17.4721 19.4616L12.4146 14.4041L7.35701 19.4616L5.91199 18.0166L10.9696 12.959L5.91199 7.90144L7.35701 6.45642L12.4146 11.514Z" fill="#161010"/>
+                    </svg>
+                </span>
+            </div>
+
+            <!-- cart body (items) -->
+            <div>
+                {% for item in cart.items %}
+                    <div class="flex gap-[16.35px] py-[20.44px]" style="border-bottom: 1px solid #161010">
+                        <span class="grid place-items-center overflow-scroll">
+                            <img src="{{ item.image | image_url: width: 108.31 }}" width="108.31" height="122.61" loading="lazy" alt="{{ item.image.alt }}">
+                        </span>
+                        
+                        <div class="flex flex-col flex-1 justify-between">
+                            {% assign title = item.title | split: '-' %}
+                            <p class="font-canela text-[32.7px] text-[#161010]">{{ title[0] }}</p>
+
+                            <quantity-input class="quantity cart-quantity flex items-center">
+                                <button class="quantity__button !w-[32.7px] !h-[32.7px] no-js-hidden" name="minus" type="button">
+                                    <span class="visually-hidden">Decrease quantity for {{ item.title }}</span>
+                                    <svg class="!w-[32.7px]" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.1532 16.0785V17.7815H23.074V16.0785H11.1532Z" fill="#161010"/>
+                                        <rect x="1.27542" y="1.09256" width="31.6754" height="31.6754" rx="15.8377" stroke="#161010" stroke-width="1.02179"/>
+                                    </svg>                                
+                                </button>
+                                
+                                <span class="font-neue text-[16.35px] text-[#161010] px-[12.48px] inline-block">{{ item.quantity }}</span>
+                                {% comment %} <input class="quantity__input" data-quantity-variant-id="{{ item.variant_id }}" type="number" name="updates[]" value="{{ item.quantity }}" data-cart-quantity="{{ item.quantity }}" min="1" step="1" aria-label="Quantity for {{ item.title }}" id="Quantity-1" data-index="1"> {% endcomment %}
+
+                                <button class="quantity__button !w-[32.7px] !h-[32.7px] no-js-hidden" name="plus" type="button">
+                                    <span class="visually-hidden">Increase quantity for {{ item.title }}</span>
+                                    <svg class="!w-[32.7px]" width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.7 16.0785V10.9696H17.403V16.0785H22.5119V17.7815H17.403V22.8904H15.7V17.7815H10.5911V16.0785H15.7Z" fill="#161010"/>
+                                        <rect x="0.713408" y="1.09244" width="31.6754" height="31.6754" rx="15.8377" stroke="#161010" stroke-width="1.02179"/>
+                                    </svg>                                    
+                                </button>
+                            </quantity-input>
+                        </div>
+
+                        <div class="flex flex-col">
+                            {% assign fprice = item.final_line_price | money_with_currency | split: ' ' %}
+                            <p class="flex-1 text-[24.52px] text-[#161010] font-neue">{{ fprice[0] }}</p>
+                            <span class="grid place-items-center">
+                                <svg width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.9031 12.1531H24.4793V13.5836H23.0488V22.8819C23.0488 23.2769 22.7286 23.5971 22.3336 23.5971H12.3201C11.925 23.5971 11.6048 23.2769 11.6048 22.8819V13.5836H10.1743V12.1531H13.7506V10.0074C13.7506 9.61235 14.0708 9.29211 14.4658 9.29211H20.1878C20.5829 9.29211 20.9031 9.61235 20.9031 10.0074V12.1531ZM21.6183 13.5836H13.0353V22.1666H21.6183V13.5836ZM15.1811 15.7294H16.6116V20.0209H15.1811V15.7294ZM18.0421 15.7294H19.4726V20.0209H18.0421V15.7294ZM15.1811 10.7226V12.1531H19.4726V10.7226H15.1811Z" fill="#8D8583"/>
+                                    <rect x="1.48892" y="0.606596" width="31.6754" height="31.6754" rx="15.8377" stroke="#8D8583" stroke-width="1.02179"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- cart footer -->
+        <div style="--side: 32.7px; max-width: calc(100% - (var(--side) + var(--side))); border-top: 1px solid #000000;" class="mx-auto w-full pt-[17.37px] pb-[20.44px]">
+            <div class="flex items-center justify-between mb-[7.7px]">
+                <p class="text-[#161010] text-[20.44px] font-neue">Subtotal</p>
+                <p class="text-[#161010] text-[20.44px] font-neue">{{ cart.items_subtotal_price | money_with_currency }}</p>
+            </div>
+            <p class="font-neue text-[16.35px] text-[#8D8583] mb-[19.85px]">Shipping is calculated at checkout</p>
+            <a href="#" class="btn block bg-[#161010] rounded-full font-neue font-medium text-white py-[16.35px] text-center text-[20.44px]">Checkout</a>
+        </div>
+    </div>
+</div>
