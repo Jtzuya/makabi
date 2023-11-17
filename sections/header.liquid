@@ -289,18 +289,30 @@
 
         <script>
           function cartHandler(e) {
-            const cartDrawer = document.querySelectorAll('[data-cart-drawer]')
-            cartDrawer.forEach(i => {
-                if(i.getAttribute('data-cart-drawer') === 'false') {
-                    i.setAttribute('data-cart-drawer', true)
-                    i.classList.remove('-right-full')
-                    i.classList.add('right-0')
-                } else {
-                    i.setAttribute('data-cart-drawer', false)
-                    i.classList.add('-right-full')
-                    i.classList.remove('right-0')
-                }
-            })
+              const cartDrawer = document.querySelectorAll('[data-cart-drawer]')
+
+              cartDrawer.forEach(i => {
+                  let cartState = JSON.parse(i.getAttribute('data-cart-drawer'))
+                  console.log('cart state', cartState)
+                  
+                  switch(cartState) {
+                      case true:
+                          document.body.style.overflow = 'auto'
+                          i.setAttribute('data-cart-drawer', false)
+                          i.classList.add('-right-full')
+                          i.classList.remove('right-0')
+                          break
+                      case false:
+                          document.body.style.overflow = 'hidden'
+                          i.setAttribute('data-cart-drawer', true)
+                          i.classList.remove('-right-full')
+                          i.classList.add('right-0')
+                          break
+                      default:
+                          console.error('something is wrong with the cartState value.')
+                          break
+                  }
+              })
           }
         </script>
       </div>
