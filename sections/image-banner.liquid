@@ -163,7 +163,7 @@
             href="{{ block.settings.button_link_1 }}"
             class="btn relative z-[2] scroll-trigger {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             data-cascade>
-            <span x-cloak class="btn-effect relative oveflow-hidden w-max flex items-center gap-x-2.5 border border-white rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-4">
+            <span class="btn-effect relative oveflow-hidden w-max flex items-center gap-x-2.5 border border-white rounded-full py-1.5 pr-1.5 pl-4 mx-auto mt-4">
               <span class="btn-text font-light font-neue text-xl text-white">{{ block.settings.button_label_1 }}</span>
               <span class="min-w-9 w-9 h-9 rounded-full bg-white grid place-items-center">
                 <svg
@@ -192,6 +192,9 @@
       <span class="lg:font-canela lg:font-normal lg:italic">the uncommon</span>
     </h3>
     <img
+      loading="lazy"
+      width="auto"
+      height="auto"
       class="absolute top-0 right-10 hidden lg:!block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
       src="{{ section.settings.image_3 | image_url: width: '608' | prepend: 'https:'  }}"
       alt="{{ section.settings.image_3.alt }}"
@@ -234,12 +237,14 @@
 
         <div
           class="{% if idx == 0 %}product-card--{{ product.id }}{% endif %} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} cursor"
-          data-cascade
-          x-cloak>
+          data-cascade>
           <a href="{{ product.url }}">
             <img
-              src="{{ product.metafields.custom.feature_image.value | img_url: 'grande' | prepend: 'https:' }}"
-              alt=""
+              loading="lazy"
+              width="auto"
+              height="auto"
+              src="{{ product.metafields.custom.feature_image.value | image_url: 'grande' | prepend: 'https://makabiandsons.com/cdn/shop/files/' }}"
+              alt="{{ product.title }}"
               class="w-full object-cover aspect-[6/4] h-[438px] md:h-[899px] lg:h-[562px]">
             <div class="pt-3 md:pt-4 lg:pt-5 {% unless forloop.last %}pb-9 md:pb-20{% endunless %} grid md:grid-cols-2">
               <p class="font-neue text-dark-txt text-[28px] md:text-[32px] lg:font-medium leading-[120%] mb-1 md:mb-2 lg:mb-[6px]">{{ product.title | split: ' ' | first }}</p>
@@ -257,9 +262,12 @@
   <div class="pt-10 pb-20 md:pb-32 md:pt-20 lg:pt-12 lg:pb-48">
     <span class="grid place-items-center">
       <img
+        loading="lazy"
+        width="auto"
+        height="auto"
         class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         src="{{ section.settings.image_4 | image_url: width: '70' | prepend: 'https:' }}"
-        alt="{{section.settings.image_4.alt}}"
+        alt="{{ section.settings.image_4.alt }}"
         data-cascade>
     </span>
 
@@ -272,6 +280,9 @@
           <div class="absolute hidden xl:!block left-full top-1/2 -translate-y-1/2 translate-x-16 opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-x-0">
             <span class="grid place-items-center w-[229px] h-[344px]">
               <img
+                loading="lazy"
+                width="auto"
+                height="auto"
                 class="cover"
                 src="{{ product.metafields.custom.feature_image.value | img_url: 'grande' | prepend: 'https:' }}"
                 alt="">
