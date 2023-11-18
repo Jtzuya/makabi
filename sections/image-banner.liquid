@@ -243,7 +243,7 @@
               loading="lazy"
               width="auto"
               height="auto"
-              src="{{ product.metafields.custom.feature_image.value | image_url: 'grande' | prepend: 'https://makabiandsons.com/cdn/shop/files/' }}"
+              src="{{ product.metafields.custom.feature_image.value | image_url: 'grande' | prepend: 'https://makabiandsons.com/cdn/shop/' }}"
               alt="{{ product.title }}"
               class="w-full object-cover aspect-[6/4] h-[438px] md:h-[899px] lg:h-[562px]">
             <div class="pt-3 md:pt-4 lg:pt-5 {% unless forloop.last %}pb-9 md:pb-20{% endunless %} grid md:grid-cols-2">
